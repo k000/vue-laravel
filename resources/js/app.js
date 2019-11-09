@@ -6,7 +6,6 @@
 
 require('./bootstrap');
 
-
 window.Vue = require('vue');
 
 import store from './store';
@@ -26,7 +25,7 @@ Vue.component('example-component', require('./components/app.vue').default);
 Vue.component('list-component', require('./components/List.vue').default);
 Vue.component('note-component', require('./components/Note.vue').default);
 Vue.component('app-component', require('./components/app.vue').default);
-
+Vue.component('vue-markdown', require('vue-markdown').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

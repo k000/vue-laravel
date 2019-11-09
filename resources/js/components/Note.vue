@@ -1,13 +1,18 @@
 <template>
     <div id="note-area">
-        <dir>
+        
+        <vue-markdown>
+            i am a ##tast**test**.
+        </vue-markdown>
+
+        <div>
             <button id="save-btn" v-on:click="createNote"><i class="fas fa-save"></i></button>
             <button id="view-btn" v-on:click="getNotes"><i class="fas fa-eye"></i></button>
             
             <button id="new-btn" v-on:click="newNote"><i class="fas fa-plus-circle"></i></button>
             <button id="trash-btn" v-on:click="deleteNote"><i class="fas fa-trash"></i></button>
             
-        </dir>
+        </div>
         <textarea name="text-content" id="text-content" cols="30" rows="10" :value="getNoteContent"></textarea>
         {{getNoteContent}}
         {{getNoteId}}
