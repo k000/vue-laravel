@@ -1,0 +1,21 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+#app-area{
+    display:flex;
+    justify-content: space-between;
+}
+
+#list-area{
+    width:35%;
+}
+
+#note-area{
+    width:60%;
+}
