@@ -19,6 +19,7 @@ export default new Vuex.Store({
         },
         getNoteContent: state => state.textcontent,
         getNoteId: state => state.noteId,
+        
     },
 
     mutations:{
@@ -32,6 +33,9 @@ export default new Vuex.Store({
         setCreateNoteId(state,id){
             state.noteId = id
         },
+        updateTextContent(state,newText){
+            state.textcontent = newText
+        }
         
     },
 
@@ -118,6 +122,10 @@ export default new Vuex.Store({
                 context.dispatch("setList")
             }
         },
+
+        updateTextContent(context,newText){
+            context.commit('updateTextContent',newText)
+        }
 
     },
 

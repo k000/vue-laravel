@@ -1961,6 +1961,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2004,6 +2007,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     newNote: function newNote() {
       this.$store.dispatch("newNote");
+    },
+    updateNoteText: function updateNoteText(e) {
+      this.$store.dispatch("updateTextContent", e.target.value);
     }
   }
 });
@@ -2019,6 +2025,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2028,7 +2041,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      text: "# unko"
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getNoteContent', 'getNoteId']))
+});
 
 /***/ }),
 
@@ -41450,7 +41471,9 @@ var render = function() {
     "div",
     { attrs: { id: "note-area" } },
     [
-      _c("dir", [
+      _c("vue-markdown", { attrs: { source: _vm.getNoteContent } }),
+      _vm._v(" "),
+      _c("div", [
         _c(
           "button",
           { attrs: { id: "save-btn" }, on: { click: _vm.createNote } },
@@ -41481,7 +41504,8 @@ var render = function() {
           cols: "30",
           rows: "10"
         },
-        domProps: { value: _vm.getNoteContent }
+        domProps: { value: _vm.getNoteContent },
+        on: { input: _vm.updateNoteText }
       }),
       _vm._v(
         "\n    " +
@@ -41519,13 +41543,7 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "app-area" } },
-    [
-      _c("list-component"),
-      _vm._v(" "),
-      _c("note-component"),
-      _vm._v(" "),
-      _c("vue-markdown", [_vm._v("i am a ##tast**test**.")])
-    ],
+    [_c("list-component"), _vm._v(" "), _c("note-component")],
     1
   )
 }
@@ -76074,6 +76092,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     },
     setCreateNoteId: function setCreateNoteId(state, id) {
       state.noteId = id;
+    },
+    updateTextContent: function updateTextContent(state, newText) {
+      state.textcontent = newText;
     }
   },
   actions: {
@@ -76232,6 +76253,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
           }
         }
       });
+    },
+    updateTextContent: function updateTextContent(context, newText) {
+      context.commit('updateTextContent', newText);
     }
   }
 }));

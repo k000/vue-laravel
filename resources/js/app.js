@@ -34,6 +34,5 @@ Vue.component('vue-markdown', require('vue-markdown').default);
 
 const app = new Vue({
     el: '#app',
-    store,
-    
+    store
 });

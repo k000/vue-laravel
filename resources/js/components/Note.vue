@@ -1,9 +1,7 @@
 <template>
     <div id="note-area">
-        
-        <vue-markdown>
-            i am a ##tast**test**.
-        </vue-markdown>
+
+        <vue-markdown :source="getNoteContent"></vue-markdown>
 
         <div>
             <button id="save-btn" v-on:click="createNote"><i class="fas fa-save"></i></button>
@@ -13,7 +11,7 @@
             <button id="trash-btn" v-on:click="deleteNote"><i class="fas fa-trash"></i></button>
             
         </div>
-        <textarea name="text-content" id="text-content" cols="30" rows="10" :value="getNoteContent"></textarea>
+        <textarea name="text-content" id="text-content" cols="30" rows="10" :value="getNoteContent" @input="updateNoteText"></textarea>
         {{getNoteContent}}
         {{getNoteId}}
     </div>
@@ -41,15 +39,20 @@
 
 import { mapGetters } from "vuex";
 
+
 export default {
     data(){
         return {
             note : "This is It,",
         }
     },
+
+
+
     computed:{
         ...mapGetters(['getNoteContent','getNoteId'])
     },
+
     methods:{
         createNote(){
             const textContet = document.getElementById('text-content').value
@@ -87,8 +90,13 @@ export default {
         },
         newNote(){
             this.$store.dispatch("newNote")
+        },
+
+        updateNoteText(e){
+            this.$store.dispatch("updateTextContent",e.target.value)
         }
 
     },
+
 }
 </script>
