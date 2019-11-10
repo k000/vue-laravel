@@ -11105,6 +11105,7 @@ a.text-dark:focus {
   display: flex;
   -webkit-box-pack: justify;
           justify-content: space-between;
+  margin-top: 15px;
 }
 
 #list-area {
@@ -11113,6 +11114,10 @@ a.text-dark:focus {
 
 #note-area {
   width: 60%;
+}
+
+#note-area.active {
+  width: 90%;
 }
 
 body {
@@ -11143,5 +11148,42 @@ nav ul li a {
 
 nav ul li a:hover {
   text-decoration: none;
+}
+
+#screen-wrap {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  border-top: 1px solid #666;
+  padding-top: 10px;
+  margin-top: auto;
+  height: 55px;
+  text-align: center;
+}
+
+#main-img {
+  background: url("/img/note.jpg");
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  padding: 20px 20px;
+  color: white;
+}
+
+.welcome-box {
+  width: 90%;
+  max-width: 800px;
+  margin: 10px auto;
+}
+
+.welcome-box h2 {
+  font-size: 16px;
 }
 

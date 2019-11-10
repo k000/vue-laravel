@@ -19,7 +19,7 @@ export default new Vuex.Store({
         },
         getNoteContent: state => state.textcontent,
         getNoteId: state => state.noteId,
-        
+
     },
 
     mutations:{
@@ -131,11 +131,3 @@ export default new Vuex.Store({
 
 })
 
-
-
-/*
-　・ルール
-    Action:非同期処理も行える
-    Actionからcommitする
-    gettersからデータを取得する
-*/

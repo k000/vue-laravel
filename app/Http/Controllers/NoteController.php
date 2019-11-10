@@ -32,6 +32,7 @@ class NoteController extends Controller
         }
 
         $note = Note::where('id',$request->id)
+            ->where('user_id',Auth::id())
             ->first();
 
         if($note){
@@ -44,6 +45,7 @@ class NoteController extends Controller
 
     public function deleteNote(Request $request){
         $note = Note::where('id',$request->id)
+            ->where('user_id',Auth::id())
             ->first();
 
         if($note){
@@ -68,6 +70,7 @@ class NoteController extends Controller
     public function getNote(Request $reuqest){
 
         $response = Note::where('id',$reuqest->id)
+                    ->where('user_id',Auth::id())
                     ->get();
         if($response){
             return $response;
@@ -81,9 +84,8 @@ class NoteController extends Controller
       
 
         $response = Note::where('content','like',"%" .$request->text ."%")
+                    ->where('user_id',Auth::id())
                     ->get();
-        
-        \Log::debug($response);
 
         if($response){
             return $response;

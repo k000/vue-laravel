@@ -15,6 +15,7 @@
 
 </head>
 <body>
+<div id="screen-wrap">
     <head>
             <nav>
                 <ul>
@@ -56,6 +57,7 @@
     <footer>
         copy right my note
     </footer>
+</div>
 <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 

@@ -1989,6 +1989,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2069,14 +2077,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      text: "# unko"
+      text: "",
+      listVisible: true
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getNoteContent', 'getNoteId']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getNoteContent', 'getNoteId'])),
+  methods: {
+    responsive: function responsive() {
+      this.listVisible = !this.listVisible;
+    }
+  }
 });
 
 /***/ }),
@@ -41497,7 +41520,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "note-area" } },
     [
       _c("div", { attrs: { id: "btn-area" } }, [
         _c("div", [
@@ -41531,6 +41553,10 @@ var render = function() {
       _vm._v(" "),
       _vm.isVisible
         ? _c("div", { attrs: { id: "note-atea" } }, [
+            _vm.getNoteId
+              ? _c("div", [_c("small", [_vm._v(">>Update")])])
+              : _c("div", [_c("small", [_vm._v(">>New")])]),
+            _vm._v(" "),
             _c("textarea", {
               attrs: {
                 name: "text-content",
@@ -41544,8 +41570,7 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("vue-markdown", { attrs: { source: _vm.getNoteContent } }),
-      _vm._v("\n    " + _vm._s(_vm.getNoteId) + "\n")
+      _c("vue-markdown", { attrs: { source: _vm.getNoteContent } })
     ],
     1
   )
@@ -41572,12 +41597,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "app-area" } },
-    [_c("list-component"), _vm._v(" "), _c("note-component")],
-    1
-  )
+  return _c("div", [
+    _c(
+      "button",
+      {
+        attrs: { id: "save-btn" },
+        on: {
+          click: function($event) {
+            _vm.listVisible = !_vm.listVisible
+          }
+        }
+      },
+      [_c("i", { staticClass: "fas fa-align-justify" })]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { attrs: { id: "app-area" } },
+      [
+        _vm.listVisible ? _c("list-component") : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { class: { active: !_vm.listVisible }, attrs: { id: "note-area" } },
+          [_c("note-component")],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -76291,12 +76340,6 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     }
   }
 }));
-/*
-　・ルール
-    Action:非同期処理も行える
-    Actionからcommitする
-    gettersからデータを取得する
-*/
 
 /***/ }),
 

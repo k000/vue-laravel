@@ -1,7 +1,9 @@
 <template>
-    <div id="note-area">
+    
+    <div>
         <div id="btn-area">
             <div>
+                
                 <button id="save-btn" v-on:click="createNote"><i class="fas fa-save"></i></button>
                 <button id="view-btn" v-on:click="changeVisible"><i class="fas fa-eye"></i></button>
             </div>
@@ -11,11 +13,17 @@
             </div>
         </div>
         <div id="note-atea" v-if="isVisible">
+            <div v-if="getNoteId">
+                <small>>>Update</small>
+            </div>
+            <div v-else>
+                <small>>>New</small>
+            </div>
             <textarea name="text-content" id="text-content" cols="30" rows="10" :value="getNoteContent" @input="updateNoteText"></textarea>
         </div>
         <vue-markdown :source="getNoteContent"></vue-markdown>
-        {{getNoteId}}
-    </div>
+    </div> 
+  
 </template>
 
 <style>
