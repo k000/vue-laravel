@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div>
-        これは最強かつ最高のノートです
+    <div id="app">
+        <app-component></app-component>
     </div>
-
+    
 @endsection

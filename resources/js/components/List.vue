@@ -1,9 +1,11 @@
 <template>
     <div id="list-area">
         <input type="text" placeholder="Serach" v-model="serach"><button @click="searchNote"><i class="fas fa-search"></i></button>
-        <ul class="note-list" v-for="item in list" v-bind:key="item.id">
-            <li @click="setTextContent(item.id)" >{{item.id}}{{item.content.substring(0,30)}}</li>
-        </ul>
+        <div id="list-box">
+            <ul class="note-list" v-for="item in list" v-bind:key="item.id">
+                <li @click="setTextContent(item.id)" >{{item.id}}{{item.content.substring(0,30)}}</li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -17,6 +19,16 @@
     ul.note-list li{
         border-bottom:1px dotted #333;
         padding:10px 0;
+        cursor: pointer;
+    }
+    ul.note-list li:hover{
+        background:ivory;
+    }
+
+    #list-box{
+        width:100%;
+        height:70vh;
+        overflow: scroll;
     }
 
 </style>

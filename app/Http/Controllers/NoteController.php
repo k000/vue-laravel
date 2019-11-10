@@ -4,16 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Note;
+use Auth;
 
 class NoteController extends Controller
 {
     public function create(Request $request){
 
+        if(!$request->content){
+            return null;
+        }
+
         // 新規Noteの作成を行う
         $note = new Note();
 
         $note->content = $request->content;
-        $note->user_id = 1;
+        $note->user_id = Auth::id();
 
         $note->save();
 
@@ -21,6 +26,10 @@ class NoteController extends Controller
     }
 
     public function updateNote(Request $request){
+
+        if(!$request->content){
+            return null;
+        }
 
         $note = Note::where('id',$request->id)
             ->first();
@@ -45,7 +54,7 @@ class NoteController extends Controller
 
     public function getList(){
         // Note一覧を返却する。
-        $response = Note::where('user_id',1)
+        $response = Note::where('user_id',Auth::id())
                         ->orderBy('updated_at','desc')
                         ->get();
         return $response;

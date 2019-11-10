@@ -17,16 +17,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::post('/note/create','NoteController@create');
-Route::get('/notes','NoteController@getList');
-Route::get('/note','NoteController@getNote');
-Route::patch('/note/update','NoteController@updateNote');
-Route::delete('/note/delete','NoteController@deleteNote');
-Route::get('/note/search','NoteController@searchNote');
+Route::group(['middleware' => 'auth'],function(){
+
+    Route::get('/home', function () {
+        return view('main');
+    });
+    Route::post('/note/create','NoteController@create');
+    Route::get('/notes','NoteController@getList');
+    Route::get('/note','NoteController@getNote');
+    Route::patch('/note/update','NoteController@updateNote');
+    Route::delete('/note/delete','NoteController@deleteNote');
+    Route::get('/note/search','NoteController@searchNote');
+
+});

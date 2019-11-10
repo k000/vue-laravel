@@ -1881,6 +1881,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1964,11 +1976,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      note: "This is It,"
+      note: "This is It,",
+      isVisible: true
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getNoteContent', 'getNoteId'])),
@@ -1992,8 +2018,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.$store.dispatch("createNote", _params);
       }
     },
-    getNotes: function getNotes() {
-      this.$store.dispatch("setList");
+    getNotes: function getNotes() {//this.$store.dispatch("setList")
+    },
+    changeVisible: function changeVisible() {
+      this.isVisible = !this.isVisible;
     },
     deleteNote: function deleteNote() {
       if (this.getNoteId) {
@@ -8476,7 +8504,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nul.note-list{\n    list-style: none;\n    margin:0;\n    padding:0 5px;\n}\nul.note-list li{\n    border-bottom:1px dotted #333;\n    padding:10px 0;\n}\n\n", ""]);
+exports.push([module.i, "\nul.note-list{\n    list-style: none;\n    margin:0;\n    padding:0 5px;\n}\nul.note-list li{\n    border-bottom:1px dotted #333;\n    padding:10px 0;\n    cursor: pointer;\n}\nul.note-list li:hover{\n    background:ivory;\n}\n#list-box{\n    width:100%;\n    height:70vh;\n    overflow: scroll;\n}\n\n", ""]);
 
 // exports
 
@@ -8495,7 +8523,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntextarea{\n    width:100%;\n    border:none;\n    color:#666;\n}\nbutton#save-btn{\n    color:greenyellow;\n}\nbutton#view-btn{\n    color:blue;\n}\nbutton#trash-btn{\n    color:red;\n}\n\n", ""]);
+exports.push([module.i, "\ntextarea{\n    width:100%;\n    border:none;\n    color:#666;\n    background:whitesmoke;\n}\n#btn-area{\n    margin-bottom:30px;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-pack: justify;\n    justify-content: space-between;\n}\nbutton#save-btn{\n    color:goldenrod;\n}\nbutton#view-btn{\n    color:blue;\n}\nbutton#trash-btn{\n    color:red;\n}\nbutton#new-btn{\n    color:darkolivegreen;\n}\n\n", ""]);
 
 // exports
 
@@ -41398,34 +41426,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "list-area" } },
-    [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.serach,
-            expression: "serach"
-          }
-        ],
-        attrs: { type: "text", placeholder: "Serach" },
-        domProps: { value: _vm.serach },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.serach = $event.target.value
-          }
+  return _c("div", { attrs: { id: "list-area" } }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.serach,
+          expression: "serach"
         }
-      }),
-      _c("button", { on: { click: _vm.searchNote } }, [
-        _c("i", { staticClass: "fas fa-search" })
-      ]),
-      _vm._v(" "),
+      ],
+      attrs: { type: "text", placeholder: "Serach" },
+      domProps: { value: _vm.serach },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.serach = $event.target.value
+        }
+      }
+    }),
+    _c("button", { on: { click: _vm.searchNote } }, [
+      _c("i", { staticClass: "fas fa-search" })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { attrs: { id: "list-box" } },
       _vm._l(_vm.list, function(item) {
         return _c("ul", { key: item.id, staticClass: "note-list" }, [
           _c(
@@ -41440,10 +41468,10 @@ var render = function() {
             [_vm._v(_vm._s(item.id) + _vm._s(item.content.substring(0, 30)))]
           )
         ])
-      })
-    ],
-    2
-  )
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41471,49 +41499,53 @@ var render = function() {
     "div",
     { attrs: { id: "note-area" } },
     [
-      _c("vue-markdown", { attrs: { source: _vm.getNoteContent } }),
-      _vm._v(" "),
-      _c("div", [
-        _c(
-          "button",
-          { attrs: { id: "save-btn" }, on: { click: _vm.createNote } },
-          [_c("i", { staticClass: "fas fa-save" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { attrs: { id: "view-btn" }, on: { click: _vm.getNotes } },
-          [_c("i", { staticClass: "fas fa-eye" })]
-        ),
-        _vm._v(" "),
-        _c("button", { attrs: { id: "new-btn" }, on: { click: _vm.newNote } }, [
-          _c("i", { staticClass: "fas fa-plus-circle" })
+      _c("div", { attrs: { id: "btn-area" } }, [
+        _c("div", [
+          _c(
+            "button",
+            { attrs: { id: "save-btn" }, on: { click: _vm.createNote } },
+            [_c("i", { staticClass: "fas fa-save" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { attrs: { id: "view-btn" }, on: { click: _vm.changeVisible } },
+            [_c("i", { staticClass: "fas fa-eye" })]
+          )
         ]),
         _vm._v(" "),
-        _c(
-          "button",
-          { attrs: { id: "trash-btn" }, on: { click: _vm.deleteNote } },
-          [_c("i", { staticClass: "fas fa-trash" })]
-        )
+        _c("div", [
+          _c(
+            "button",
+            { attrs: { id: "new-btn" }, on: { click: _vm.newNote } },
+            [_c("i", { staticClass: "fas fa-plus-circle" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { attrs: { id: "trash-btn" }, on: { click: _vm.deleteNote } },
+            [_c("i", { staticClass: "fas fa-trash" })]
+          )
+        ])
       ]),
       _vm._v(" "),
-      _c("textarea", {
-        attrs: {
-          name: "text-content",
-          id: "text-content",
-          cols: "30",
-          rows: "10"
-        },
-        domProps: { value: _vm.getNoteContent },
-        on: { input: _vm.updateNoteText }
-      }),
-      _vm._v(
-        "\n    " +
-          _vm._s(_vm.getNoteContent) +
-          "\n    " +
-          _vm._s(_vm.getNoteId) +
-          "\n"
-      )
+      _vm.isVisible
+        ? _c("div", { attrs: { id: "note-atea" } }, [
+            _c("textarea", {
+              attrs: {
+                name: "text-content",
+                id: "text-content",
+                cols: "30",
+                rows: "10"
+              },
+              domProps: { value: _vm.getNoteContent },
+              on: { input: _vm.updateNoteText }
+            })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("vue-markdown", { attrs: { source: _vm.getNoteContent } }),
+      _vm._v("\n    " + _vm._s(_vm.getNoteId) + "\n")
     ],
     1
   )

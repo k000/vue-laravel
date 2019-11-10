@@ -1,18 +1,19 @@
 <template>
     <div id="note-area">
-
-        <vue-markdown :source="getNoteContent"></vue-markdown>
-
-        <div>
-            <button id="save-btn" v-on:click="createNote"><i class="fas fa-save"></i></button>
-            <button id="view-btn" v-on:click="getNotes"><i class="fas fa-eye"></i></button>
-            
-            <button id="new-btn" v-on:click="newNote"><i class="fas fa-plus-circle"></i></button>
-            <button id="trash-btn" v-on:click="deleteNote"><i class="fas fa-trash"></i></button>
-            
+        <div id="btn-area">
+            <div>
+                <button id="save-btn" v-on:click="createNote"><i class="fas fa-save"></i></button>
+                <button id="view-btn" v-on:click="changeVisible"><i class="fas fa-eye"></i></button>
+            </div>
+            <div>
+                <button id="new-btn" v-on:click="newNote"><i class="fas fa-plus-circle"></i></button>
+                <button id="trash-btn" v-on:click="deleteNote"><i class="fas fa-trash"></i></button>
+            </div>
         </div>
-        <textarea name="text-content" id="text-content" cols="30" rows="10" :value="getNoteContent" @input="updateNoteText"></textarea>
-        {{getNoteContent}}
+        <div id="note-atea" v-if="isVisible">
+            <textarea name="text-content" id="text-content" cols="30" rows="10" :value="getNoteContent" @input="updateNoteText"></textarea>
+        </div>
+        <vue-markdown :source="getNoteContent"></vue-markdown>
         {{getNoteId}}
     </div>
 </template>
@@ -22,15 +23,27 @@
         width:100%;
         border:none;
         color:#666;
+        background:whitesmoke;
     }
+
+    #btn-area{
+        margin-bottom:30px;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+    
     button#save-btn{
-        color:greenyellow;
+        color:goldenrod;
     }
     button#view-btn{
         color:blue;
     }
     button#trash-btn{
         color:red;
+    }
+    button#new-btn{
+        color:darkolivegreen;
     }
 
 </style>
@@ -44,6 +57,7 @@ export default {
     data(){
         return {
             note : "This is It,",
+            isVisible:true,
         }
     },
 
@@ -75,7 +89,11 @@ export default {
 
         },
         getNotes(){
-            this.$store.dispatch("setList")
+            //this.$store.dispatch("setList")
+           
+        },
+        changeVisible(){
+            this.isVisible = !this.isVisible
         },
         deleteNote(){
             
